@@ -52,12 +52,11 @@ app.get('/api/docs/:id.json', async (req, res) => {
   }
 });
 
-app.get('/api/docs/:id/read', async (req, res) => {
+app.post('/api/docs/:id/read', async (req, res) => {
   const id = parseInt(req.params.id);
-  console.log(id);
-  const result = false;
+  const result = await db.collection('docs').updateOne({ id: id }, { $inc: { readCount: 1 } });
 
-  if (result) {
+  if (result.modifiedCount > 0) {
     res.status(200).send();
   } else {
     res.status(404).send();

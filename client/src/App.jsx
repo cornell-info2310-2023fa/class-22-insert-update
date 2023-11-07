@@ -51,6 +51,13 @@ export default function App() {
   }
 
   function updateDocReadCount(docId) {
+    axios.post(`/api/docs/${docId}/read`)
+      .then((response) => {
+        // do nothing
+      })
+      .catch((err) => {
+        // do nothing
+      });
   }
 
   // load docs after initial render
